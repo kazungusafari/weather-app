@@ -17,7 +17,6 @@ export const HistoricalWeatherInformation = ({
   name: string;
   historicalWeatherData: any;
 }) => {
-  console.log(historicalWeatherData.hourly);
   return (
     <>
       <h1>Historical weather information for {name}</h1>
@@ -103,8 +102,8 @@ export const HistoricalWeatherInformation = ({
           <Area
             type="monotone"
             dataKey="pressure"
-            stroke="#82ca9d"
-            fill="#82ca9d"
+            stroke="#8884d8"
+            fill="#8884d8"
           />
         </AreaChart>
       </ResponsiveContainer>

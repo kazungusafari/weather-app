@@ -24,7 +24,6 @@ const initialState: State = {
 export const getHistoricalWeatherInfoByCityAsyncThunk = createAsyncThunk<any, { lat: number, lon: number, dt: number }>('historicalWeatherInfo/get', async (location: { dt: number, lat: number, lon: number }, thunkApi) => {
     try {
         const response = await get('https://community-open-weather-map.p.rapidapi.com/onecall/timemachine', location);
-        console.log(response)
         return thunkApi.fulfillWithValue(response.data)
 
     }

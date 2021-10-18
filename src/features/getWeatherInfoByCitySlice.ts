@@ -1,8 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { addSearchAsyncThunk } from ".";
 import { get } from "../api/get";
-import { dB } from "../helpers";
-import db from "../helpers/indexDb";
 import { getHistoricalWeatherInfoByCityAsyncThunk } from "./getHistoricaWeatherInfoByCity";
 
 type State = {

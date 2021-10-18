@@ -3,6 +3,7 @@ import { useEffect } from "react";
 export const SearchHistory = ({ recentSearches, getRecentSearches }: any) => {
   useEffect(() => {
     getRecentSearches();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const renderRecentSearches = () => {
