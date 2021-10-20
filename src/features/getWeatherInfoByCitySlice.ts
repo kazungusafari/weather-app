@@ -2,6 +2,9 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { addSearchAsyncThunk } from ".";
 import { get } from "../api/get";
 import { getHistoricalWeatherInfoByCityAsyncThunk } from "./getHistoricaWeatherInfoByCity";
+import * as Helpers from '../helpers'
+
+const { getWeatherData } = Helpers;
 
 type State = {
     isLoading: boolean,
@@ -19,24 +22,15 @@ const initialState: State = {
     data: ''
 }
 
-export const getWeatherInfoByCityAsyncThunk = createAsyncThunk<any, string>('weatherInfo/get', async (city: string, thunkApi) => {
+export const getWeatherInfoByCityAsyncThunk = createAsyncThunk<any, string>('weatherInfo/get', async (city: string, { fulfillWithValue, dispatch, rejectWithValue }) => {
     try {
         const response: any = await get('https://community-open-weather-map.p.rapidapi.com/weather', { q: city });
-        thunkApi.dispatch(addSearchAsyncThunk(city))
-        const weatherData = {
-            name: response.data.name,
-            description: response.data.weather[0].description,
-            temperature: response.data.main.temp,
-            humidity: response.data.main.humidity,
-            pressure: response.data.main.pressure,
-            dateTime: response.data.dt,
-            windSpeed: response.data.wind.speed
-        }
-        thunkApi.dispatch(getHistoricalWeatherInfoByCityAsyncThunk({ dt: response.data.dt, lat: response.data.coord.lat, lon: response.data.coord.lon }))
-        return thunkApi.fulfillWithValue(weatherData);
+        dispatch(addSearchAsyncThunk(city))
+        dispatch(getHistoricalWeatherInfoByCityAsyncThunk({ dt: response.data.dt, lat: response.data.coord.lat, lon: response.data.coord.lon }))
+        return fulfillWithValue(response.data);
     }
     catch (error: any) {
-        return thunkApi.rejectWithValue(error.message)
+        return rejectWithValue(error.message)
     }
 
 })
@@ -58,7 +52,7 @@ export const getWeatherInfoByCitySlice = createSlice({
             state.isSuccess = true;
             state.isError = false;
             state.errors = ''
-            state.data = action.payload
+            state.data = getWeatherData(action.payload)
         })
         builder.addCase(getWeatherInfoByCityAsyncThunk.rejected, (state, action) => {
             state.isLoading = false;

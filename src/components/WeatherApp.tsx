@@ -1,15 +1,18 @@
 //Form state management library
 
-import {
-  useForm,
-  FormField,
-  getFieldIfEvent,
-} from "@kazungusafari/react-form-field";
+import { useForm, FormField } from "@kazungusafari/react-form-field";
+import React from "react";
 
 //Components
 
-import { HistoricalWeatherInformation } from "./HistoricalWeatherInformation";
-import { WeatherInformation } from "./WeatherInformation";
+import {
+  HistoricalWeatherInformation,
+  WeatherInformation,
+  SearchInput,
+} from "../components";
+
+//Types
+import { WeatherAppProps } from "../types";
 
 export const WeatherApp = ({
   historicalWeatherData,
@@ -19,16 +22,7 @@ export const WeatherApp = ({
   currentWeatherDataIsLoading,
   currentWeatherDataIsError,
   getWeatherData,
-}: {
-  historicalWeatherData: any;
-  historicalWeatherDataisLoading: boolean;
-  getHistoricalWeatherData: any;
-  getWeatherData: any;
-  historicalWeatherDataisError: boolean;
-  currentWeatherDataIsError: boolean;
-  currentWeatherData: any;
-  currentWeatherDataIsLoading: boolean;
-}) => {
+}: WeatherAppProps) => {
   const {
     formData,
     formErrors,
@@ -37,7 +31,7 @@ export const WeatherApp = ({
     setFormError,
   } = useForm({ city: "" });
 
-  const handleSearch = (e: any) => {
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (formHasError === false) {
       getWeatherData(formData.city);
@@ -50,30 +44,21 @@ export const WeatherApp = ({
     <main>
       <div className="form">
         <form onSubmit={handleSearch}>
-          <FormField name="city" required onFieldError={setFormError}>
-            {({ fieldErrors, isFieldTouched, onChangeFieldErrorHandler }) => {
-              return (
-                <div>
-                  <input
-                    id="city"
-                    name="city"
-                    onChange={(e) => {
-                      const field = getFieldIfEvent(e);
-                      onChangeFieldValueHandler(field);
-                      onChangeFieldErrorHandler(field);
-                    }}
-                    value={formData.city}
-                    placeholder="Enter city"
-                  />
-                  <button onClick={handleSearch}>Search</button>
-                  <div className="input-error">
-                    {isFieldTouched && fieldErrors.type === "required" && (
-                      <p className="error">City is required</p>
-                    )}
-                  </div>
-                </div>
-              );
-            }}
+          <FormField
+            name="city"
+            required
+            onFieldError={setFormError}
+            type="alpha"
+          >
+            {({ fieldErrors, isFieldTouched, onChangeFieldErrorHandler }) => (
+              <SearchInput
+                onChangeFieldErrorHandler={onChangeFieldErrorHandler}
+                onChangeFieldValueHandler={onChangeFieldValueHandler}
+                isFieldTouched={isFieldTouched}
+                fieldErrors={fieldErrors}
+                value={formData.city}
+              />
+            )}
           </FormField>
         </form>
       </div>

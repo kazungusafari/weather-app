@@ -1,10 +1,8 @@
-import * as Helpers from "../helpers";
+import { WeatherInformationProps } from "../types";
 
 export const WeatherInformation = ({
   weatherInformation,
-}: {
-  weatherInformation: any;
-}) => {
+}: WeatherInformationProps) => {
   const {
     name,
     description,
@@ -14,15 +12,16 @@ export const WeatherInformation = ({
     windSpeed,
     dateTime,
   } = weatherInformation;
+
   return (
     <>
       <h1 data-testid="name">{name}</h1>
       <p>{description}</p>
-      <p>Temperature : {Helpers.kToC(temperature)} &#8451;</p>
+      <p>Temperature : {temperature} &#8451;</p>
       <p>Wind speed : {windSpeed} km/h</p>
       <p>Humidity : {humidity} %</p>
       <p>Pressure : {pressure}</p>
-      <p>{Helpers.getDateTimeFromEpochTime(dateTime)}</p>
+      <p>{dateTime}</p>
     </>
   );
 };

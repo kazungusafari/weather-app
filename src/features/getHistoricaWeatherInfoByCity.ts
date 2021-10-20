@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { get } from "../api/get";
+import * as Helpers from '../helpers'
 
+const { getHistoricalData } = Helpers
 
 type State = {
     isLoading: boolean,
@@ -21,14 +23,13 @@ const initialState: State = {
 
 
 
-export const getHistoricalWeatherInfoByCityAsyncThunk = createAsyncThunk<any, { lat: number, lon: number, dt: number }>('historicalWeatherInfo/get', async (location: { dt: number, lat: number, lon: number }, thunkApi) => {
+export const getHistoricalWeatherInfoByCityAsyncThunk = createAsyncThunk<any, { lat: number, lon: number, dt: number }>('historicalWeatherInfo/get', async (location: { dt: number, lat: number, lon: number }, { fulfillWithValue, rejectWithValue }) => {
     try {
         const response = await get('https://community-open-weather-map.p.rapidapi.com/onecall/timemachine', location);
-        return thunkApi.fulfillWithValue(response.data)
-
+        return fulfillWithValue(response.data)
     }
     catch (error: any) {
-        return thunkApi.rejectWithValue(error.message)
+        return rejectWithValue(error.message)
     }
 
 })
@@ -50,7 +51,7 @@ export const getHistoricalWeatherInfoByCitySlice = createSlice({
             state.isSuccess = true;
             state.isError = false;
             state.errors = ''
-            state.data = action.payload
+            state.data = getHistoricalData(action.payload.hourly)
         })
         builder.addCase(getHistoricalWeatherInfoByCityAsyncThunk.rejected, (state, action) => {
             state.isLoading = false;

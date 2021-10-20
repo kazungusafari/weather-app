@@ -1,32 +1,33 @@
 import { useEffect } from "react";
+import { Search, SearchHistoryProps } from "../types";
 
-export const SearchHistory = ({ recentSearches, getRecentSearches }: any) => {
+export const SearchHistory = ({
+  recentSearches,
+  getRecentSearches,
+  isError,
+  isLoading,
+}: SearchHistoryProps) => {
   useEffect(() => {
     getRecentSearches();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const renderRecentSearches = () => {
-    let recentSearchesLen = recentSearches.length;
-    if (recentSearchesLen > 0) {
-      return recentSearches.map(
-        (data: { city: string; id: number }, index: number) => {
-          return (
-            <p key={index}>
-              City : &nbsp;
-              {data.city}
-            </p>
-          );
-        }
-      );
-    } else {
-      return <p>No Searches history</p>;
-    }
-  };
+  }, [getRecentSearches]);
 
   return (
     <main>
-      <div>{renderRecentSearches()}</div>
+      <div>
+        {recentSearches &&
+          recentSearches.map((data: Search, index: number) => {
+            return (
+              <p key={index}>
+                City : &nbsp;
+                {data.city}
+              </p>
+            );
+          })}
+        {isError && (
+          <p>There was an error trying to fetch your search history</p>
+        )}
+        {isLoading && <p>Loading ...</p>}
+      </div>
     </main>
   );
 };

@@ -8,27 +8,24 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-import * as Helpers from "../helpers";
+import { HistoricalWeatherInformationProps } from "../types";
 
 export const HistoricalWeatherInformation = ({
   name,
   historicalWeatherData,
-}: {
-  name: string;
-  historicalWeatherData: any;
-}) => {
+}: HistoricalWeatherInformationProps) => {
   return (
     <>
       <h1>Historical weather information for {name}</h1>
       <p>
-        Temperatures for {name} for the last{" "}
-        {historicalWeatherData.hourly.length} hours
+        Temperatures for {name} for the last {historicalWeatherData.length}{" "}
+        hours
       </p>
       <ResponsiveContainer width="100%" height={200}>
         <AreaChart
           width={500}
           height={200}
-          data={Helpers.getNewArray(historicalWeatherData.hourly)}
+          data={historicalWeatherData}
           syncId="anyId"
           margin={{
             top: 10,
@@ -50,14 +47,13 @@ export const HistoricalWeatherInformation = ({
         </AreaChart>
       </ResponsiveContainer>
       <p data-testid="humidity heading">
-        Humidity for {name} for the last {historicalWeatherData.hourly.length}{" "}
-        hours
+        Humidity for {name} for the last {historicalWeatherData.length} hours
       </p>
       <ResponsiveContainer width="100%" height={200}>
         <AreaChart
           width={500}
           height={200}
-          data={Helpers.getNewArray(historicalWeatherData.hourly)}
+          data={historicalWeatherData}
           syncId="anyId"
           margin={{
             top: 10,
@@ -79,14 +75,13 @@ export const HistoricalWeatherInformation = ({
         </AreaChart>
       </ResponsiveContainer>
       <p>
-        Pressure for {name} for the last {historicalWeatherData.hourly.length}{" "}
-        hours
+        Pressure for {name} for the last {historicalWeatherData.length} hours
       </p>
       <ResponsiveContainer width="100%" height={200}>
         <AreaChart
           width={500}
           height={200}
-          data={Helpers.getNewArray(historicalWeatherData.hourly)}
+          data={historicalWeatherData}
           syncId="anyId"
           margin={{
             top: 10,

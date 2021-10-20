@@ -17,13 +17,13 @@ const initialState: State = {
     data: ''
 }
 
-export const addSearchAsyncThunk = createAsyncThunk<any, string>('searchHistory/add', async (city: string, thunkApi) => {
+export const addSearchAsyncThunk = createAsyncThunk<any, string>('searchHistory/add', async (city: string, { fulfillWithValue, rejectWithValue }) => {
     try {
         dB.addSearch({ city })
-        return thunkApi.fulfillWithValue('Added successfully')
+        return fulfillWithValue('Added successfully')
     }
     catch (error: any) {
-        return thunkApi.rejectWithValue('Could add city to the search history')
+        return rejectWithValue('Could add city to the search history')
     }
 
 })

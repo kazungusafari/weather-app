@@ -17,13 +17,13 @@ const initialState: State = {
     data: ''
 }
 
-export const getSearchAsyncThunk = createAsyncThunk<any>('searchHistory/get', async (_, thunkApi) => {
+export const getSearchAsyncThunk = createAsyncThunk<any>('searchHistory/get', async (_, { fulfillWithValue, rejectWithValue }) => {
     try {
         let allSearches = await dB.getRecentSearches;
-        return thunkApi.fulfillWithValue(allSearches)
+        return fulfillWithValue(allSearches)
     }
     catch (error: any) {
-        return thunkApi.rejectWithValue('No search history found')
+        return rejectWithValue('No search history found')
     }
 
 })
