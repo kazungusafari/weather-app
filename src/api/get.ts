@@ -1,7 +1,5 @@
 import axios from "axios";
 
-console.log(process.env)
-
 export const get = async (url: string, params: any) => await axios.get(url, {
     params, headers: {
         'x-rapidapi-host': 'community-open-weather-map.p.rapidapi.com',
