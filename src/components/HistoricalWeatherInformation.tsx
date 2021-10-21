@@ -8,17 +8,18 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
+import { withHistoricalWeatherData } from "../hoc";
+
 import { HistoricalWeatherInformationProps } from "../types";
 
-export const HistoricalWeatherInformation = ({
-  name,
+export const HistoricalWeatherInformationW = ({
   historicalWeatherData,
 }: HistoricalWeatherInformationProps) => {
   return (
     <>
-      <h1>Historical weather information for {name}</h1>
+      <h1>Historical weather information</h1>
       <p>
-        Temperatures for {name} for the last {historicalWeatherData.length}
+        Temperatures for the last {historicalWeatherData.length}
         hours
       </p>
       <ResponsiveContainer width="100%" height={200}>
@@ -47,7 +48,7 @@ export const HistoricalWeatherInformation = ({
         </AreaChart>
       </ResponsiveContainer>
       <p data-testid="humidity heading">
-        Humidity for {name} for the last {historicalWeatherData.length} hours
+        Humidity for the last {historicalWeatherData.length} hours
       </p>
       <ResponsiveContainer width="100%" height={200}>
         <AreaChart
@@ -74,9 +75,7 @@ export const HistoricalWeatherInformation = ({
           />
         </AreaChart>
       </ResponsiveContainer>
-      <p>
-        Pressure for {name} for the last {historicalWeatherData.length} hours
-      </p>
+      <p>Pressure for the last {historicalWeatherData.length} hours</p>
       <ResponsiveContainer width="100%" height={200}>
         <AreaChart
           width={500}
@@ -105,3 +104,7 @@ export const HistoricalWeatherInformation = ({
     </>
   );
 };
+
+export const HistoricalWeatherInformation = withHistoricalWeatherData(
+  HistoricalWeatherInformationW
+);

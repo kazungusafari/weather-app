@@ -1,25 +1,18 @@
 import React from "react";
-import "./App.css";
 
+//CSS
+import "./App.css";
 import "react-history-search/dist/index.css";
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { WeatherApp, SearchHistory } from "./components";
+//Components
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { WeatherApp, SearchHistory, Nav } from "./components";
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/search-history">View Search history</Link>
-            </li>
-          </ul>
-        </nav>
+        <Nav />
         <Switch>
           <Route exact path="/">
             <WeatherApp />

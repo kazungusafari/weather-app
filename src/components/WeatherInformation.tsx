@@ -1,6 +1,7 @@
+import { withWeatherData } from "../hoc";
 import { WeatherInformationProps } from "../types";
 
-export const WeatherInformation = ({
+export const WeatherInformationW = ({
   weatherInformation,
 }: WeatherInformationProps) => {
   const {
@@ -25,3 +26,5 @@ export const WeatherInformation = ({
     </>
   );
 };
+
+export const WeatherInformation = withWeatherData(WeatherInformationW);

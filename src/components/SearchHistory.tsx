@@ -1,14 +1,16 @@
-import { useSearchHistory } from "../hooks/useSearchHistory";
+import { withSearchHistory } from "../hoc";
 import { Search } from "../types";
 
-export const SearchHistory = () => {
-  const { recentSearches, isError, isLoading } = useSearchHistory();
-
+export const SearchHistoryW = ({
+  searchHistory,
+}: {
+  searchHistory: Search[];
+}) => {
   return (
     <main>
       <div>
-        {recentSearches &&
-          recentSearches.map((value: Search) => {
+        {searchHistory &&
+          searchHistory.map((value: Search) => {
             return (
               <p key={value.id}>
                 City : &nbsp;
@@ -16,11 +18,9 @@ export const SearchHistory = () => {
               </p>
             );
           })}
-        {isError && (
-          <p>There was an error trying to fetch your search history</p>
-        )}
-        {isLoading && <p>Loading ...</p>}
       </div>
     </main>
   );
 };
+
+export const SearchHistory = withSearchHistory(SearchHistoryW);

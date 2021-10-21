@@ -20,7 +20,6 @@ export type HistoricalWeatherDataT = {
 }
 
 export type HistoricalWeatherInformationProps = {
-    name: string;
     historicalWeatherData: HistoricalWeatherDataT[];
 };
 
@@ -201,3 +200,25 @@ export type HistoricalResponseData = {
         }
     ]
 }
+
+
+export type FormProps = {
+    formData: { city: string };
+    onChangeFieldValueHandler: (field: BasicField) => void;
+    setFormError: (error: FormFieldError) => void;
+    formHasError: boolean;
+    handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+}
+
+
+export type WithHistoricalWeatherDataProps = {
+    historicalWeatherData: HistoricalData;
+};
+
+export type WithSearchHistoryProps = {
+    searchHistory: Search[];
+};
+
+export type WithWeatherDataProps = {
+    weatherInformation: CurrentWeather;
+};
