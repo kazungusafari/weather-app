@@ -18,7 +18,7 @@ export const HistoricalWeatherInformation = ({
     <>
       <h1>Historical weather information for {name}</h1>
       <p>
-        Temperatures for {name} for the last {historicalWeatherData.length}{" "}
+        Temperatures for {name} for the last {historicalWeatherData.length}
         hours
       </p>
       <ResponsiveContainer width="100%" height={200}>

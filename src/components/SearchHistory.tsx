@@ -1,25 +1,18 @@
-import { useEffect } from "react";
-import { Search, SearchHistoryProps } from "../types";
+import { useSearchHistory } from "../hooks/useSearchHistory";
+import { Search } from "../types";
 
-export const SearchHistory = ({
-  recentSearches,
-  getRecentSearches,
-  isError,
-  isLoading,
-}: SearchHistoryProps) => {
-  useEffect(() => {
-    getRecentSearches();
-  }, [getRecentSearches]);
+export const SearchHistory = () => {
+  const { recentSearches, isError, isLoading } = useSearchHistory();
 
   return (
     <main>
       <div>
         {recentSearches &&
-          recentSearches.map((data: Search, index: number) => {
+          recentSearches.map((value: Search) => {
             return (
-              <p key={index}>
+              <p key={value.id}>
                 City : &nbsp;
-                {data.city}
+                {value.city}
               </p>
             );
           })}

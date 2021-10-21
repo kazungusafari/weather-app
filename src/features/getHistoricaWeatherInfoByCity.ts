@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { get } from "../api/get";
 import * as Helpers from '../helpers'
+import { HistoricalData } from "../types";
 
 const { getHistoricalData } = Helpers
 
@@ -9,7 +10,7 @@ type State = {
     isSuccess: boolean,
     isError: boolean,
     errors: any,
-    data: any
+    data: HistoricalData[]
 }
 
 const initialState: State = {
@@ -17,7 +18,7 @@ const initialState: State = {
     isSuccess: false,
     isError: false,
     errors: '',
-    data: ''
+    data: []
 }
 
 
@@ -44,7 +45,7 @@ export const getHistoricalWeatherInfoByCitySlice = createSlice({
             state.isSuccess = false;
             state.isError = false;
             state.errors = ''
-            state.data = ''
+            state.data = []
         })
         builder.addCase(getHistoricalWeatherInfoByCityAsyncThunk.fulfilled, (state, action) => {
             state.isLoading = false;
@@ -58,7 +59,7 @@ export const getHistoricalWeatherInfoByCitySlice = createSlice({
             state.isSuccess = false;
             state.isError = true;
             state.errors = action.payload
-            state.data = ''
+            state.data = []
         })
     }
 })

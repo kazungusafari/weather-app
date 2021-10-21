@@ -1,12 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { dB } from "../helpers";
+import { Search } from "../types"
 
 type State = {
     isLoading: boolean,
     isSuccess: boolean,
     isError: boolean,
     errors: any,
-    data: ''
+    data: Search[]
 
 }
 const initialState: State = {
@@ -14,7 +15,7 @@ const initialState: State = {
     isSuccess: false,
     isError: false,
     errors: '',
-    data: ''
+    data: []
 }
 
 export const getSearchAsyncThunk = createAsyncThunk<any>('searchHistory/get', async (_, { fulfillWithValue, rejectWithValue }) => {
@@ -38,7 +39,7 @@ export const getSearchSlice = createSlice({
             state.isSuccess = false;
             state.isError = false;
             state.errors = ''
-            state.data = ''
+            state.data = []
         })
         builder.addCase(getSearchAsyncThunk.fulfilled, (state, action) => {
             state.isLoading = false;
@@ -52,7 +53,7 @@ export const getSearchSlice = createSlice({
             state.isSuccess = false;
             state.isError = true;
             state.errors = action.payload
-            state.data = ''
+            state.data = []
         })
     }
 })

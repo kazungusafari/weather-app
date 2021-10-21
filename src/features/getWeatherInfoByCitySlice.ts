@@ -3,6 +3,7 @@ import { addSearchAsyncThunk } from ".";
 import { get } from "../api/get";
 import { getHistoricalWeatherInfoByCityAsyncThunk } from "./getHistoricaWeatherInfoByCity";
 import * as Helpers from '../helpers'
+import { CurrentWeather } from "../types";
 
 const { getWeatherData } = Helpers;
 
@@ -11,7 +12,7 @@ type State = {
     isSuccess: boolean,
     isError: boolean,
     errors: any,
-    data: any
+    data: CurrentWeather
 }
 
 const initialState: State = {
@@ -19,7 +20,7 @@ const initialState: State = {
     isSuccess: false,
     isError: false,
     errors: '',
-    data: ''
+    data: {} as CurrentWeather
 }
 
 export const getWeatherInfoByCityAsyncThunk = createAsyncThunk<any, string>('weatherInfo/get', async (city: string, { fulfillWithValue, dispatch, rejectWithValue }) => {
@@ -45,7 +46,7 @@ export const getWeatherInfoByCitySlice = createSlice({
             state.isSuccess = false;
             state.isError = false;
             state.errors = ''
-            state.data = ''
+            state.data = {} as CurrentWeather
         })
         builder.addCase(getWeatherInfoByCityAsyncThunk.fulfilled, (state, action) => {
             state.isLoading = false;
@@ -59,7 +60,7 @@ export const getWeatherInfoByCitySlice = createSlice({
             state.isSuccess = false;
             state.isError = true;
             state.errors = action.payload
-            state.data = ''
+            state.data = {} as CurrentWeather
         })
 
 

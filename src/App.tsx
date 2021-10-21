@@ -4,7 +4,7 @@ import "./App.css";
 import "react-history-search/dist/index.css";
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { WeatherAppContainer, SearchHistoryContainer } from "./containers";
+import { WeatherApp, SearchHistory } from "./components";
 
 function App() {
   return (
@@ -22,10 +22,10 @@ function App() {
         </nav>
         <Switch>
           <Route exact path="/">
-            <WeatherAppContainer />
+            <WeatherApp />
           </Route>
           <Route path="/search-history">
-            <SearchHistoryContainer />
+            <SearchHistory />
           </Route>
         </Switch>
       </div>

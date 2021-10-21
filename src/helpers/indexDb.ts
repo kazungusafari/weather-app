@@ -1,13 +1,7 @@
 import Dexie from 'dexie'
 
-export interface Search {
-    id?: number;
-    city?: string;
-
-}
-
 class RecentSearchesDatabase extends Dexie {
-    public recentSearches: Dexie.Table<Search, number>;
+    public recentSearches: Dexie.Table<{ city: string, id?: number }, number>;
 
     public constructor() {
         super("RecentSerchesDatabase");

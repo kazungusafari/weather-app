@@ -1,6 +1,7 @@
 import * as Helpers from "../helpers";
+import { WeatherResponseData } from "../types";
 
-export const getWeatherData = (payload: any) => {
+export const getWeatherData = (payload: WeatherResponseData) => {
   return {
     name: payload.name,
     description: payload.weather[0].description,

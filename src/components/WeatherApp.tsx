@@ -2,6 +2,7 @@
 
 import { useForm, FormField } from "@kazungusafari/react-form-field";
 import React from "react";
+import { compose } from "redux";
 
 //Components
 
@@ -10,19 +11,21 @@ import {
   WeatherInformation,
   SearchInput,
 } from "../components";
+import { useWeather } from "../hooks/useWeather";
 
-//Types
-import { WeatherAppProps } from "../types";
+export const WeatherApp = () => {
+  const {
+    getWeatherInfoByCityAsyncThunk,
+    historicalWeatherData,
+    historicalWeatherDataisError,
+    historicalWeatherDataisLoading,
+    historicalWeatherDataisSuccess,
+    currentWeatherData,
+    currentWeatherDataIsLoading,
+    currentWeatherDataIsError,
+    currentWeatherDataIsSuccess,
+  } = useWeather();
 
-export const WeatherApp = ({
-  historicalWeatherData,
-  historicalWeatherDataisError,
-  historicalWeatherDataisLoading,
-  currentWeatherData,
-  currentWeatherDataIsLoading,
-  currentWeatherDataIsError,
-  getWeatherData,
-}: WeatherAppProps) => {
   const {
     formData,
     formErrors,
@@ -34,7 +37,7 @@ export const WeatherApp = ({
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (formHasError === false) {
-      getWeatherData(formData.city);
+      getWeatherInfoByCityAsyncThunk(formData.city);
     } else {
       console.log(formErrors);
     }
@@ -63,7 +66,7 @@ export const WeatherApp = ({
         </form>
       </div>
       <div className="result">
-        {currentWeatherData && (
+        {currentWeatherDataIsSuccess && (
           <WeatherInformation weatherInformation={currentWeatherData} />
         )}
         {currentWeatherDataIsLoading && <p>Loading ......</p>}
@@ -73,7 +76,7 @@ export const WeatherApp = ({
             .Please try later
           </p>
         )}
-        {historicalWeatherData && (
+        {historicalWeatherDataisSuccess && (
           <HistoricalWeatherInformation
             name={currentWeatherData.name}
             historicalWeatherData={historicalWeatherData}
