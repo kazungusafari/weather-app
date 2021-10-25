@@ -1,4 +1,7 @@
+import React from "react";
+
 import { withSearchHistory } from "../hoc";
+
 import { Search } from "../types";
 
 export const SearchHistoryW = ({

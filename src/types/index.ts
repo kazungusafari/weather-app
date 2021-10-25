@@ -1,5 +1,5 @@
-import { BasicField } from "@kazungusafari/react-form-field";
-import { FormFieldError } from "@kazungusafari/react-form-field/dist/Types";
+import { BasicField } from "@formfield/react";
+import { FormFieldError } from "@formfield/react/dist/Types";
 import { Action, ThunkAction } from "@reduxjs/toolkit";
 import { store } from "../store";
 

@@ -1,4 +1,5 @@
-import { getFieldIfEvent } from "@kazungusafari/react-form-field";
+import React from "react";
+import { getFieldIfEvent } from "@formfield/react";
 import { SearchInputProps } from "../types";
 
 export const SearchInput = ({
@@ -8,16 +9,18 @@ export const SearchInput = ({
   value,
   fieldErrors,
 }: SearchInputProps) => {
+  const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const field = getFieldIfEvent(e);
+    onChangeFieldValueHandler(field);
+    onChangeFieldErrorHandler(field);
+  };
+
   return (
     <>
       <input
         id="city"
         name="city"
-        onChange={(e) => {
-          const field = getFieldIfEvent(e);
-          onChangeFieldValueHandler(field);
-          onChangeFieldErrorHandler(field);
-        }}
+        onChange={inputHandler}
         value={value}
         placeholder="Enter city"
       />

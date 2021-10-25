@@ -1,3 +1,4 @@
+import React from "react";
 import { ErrorString, Loading } from "../components";
 import { useSearchHistory } from "../hooks";
 import { WithSearchHistoryProps } from "../types";

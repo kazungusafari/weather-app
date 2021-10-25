@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@kazungusafari/react-form-field": "^1.0.0-alpha.3",
+    "@formfield/react": "^0.0.1-alpha.2",
     "@reduxjs/toolkit": "^1.5.1",
-    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "@types/jest": "^24.0.0",
@@ -24,7 +24,7 @@
     "react-history-search": "^0.0.5",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.3.0",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^3.4.4",
     "recharts": "^2.1.4",
     "save-dev": "^0.0.1-security",
     "typescript": "~4.1.5"

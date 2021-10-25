@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import React from "react";
 
-import { useForm } from "@kazungusafari/react-form-field";
+import { useForm } from "@formfield/react";
 import { getWeatherInfoByCityAsyncThunk } from "../features";
 import { useAppDispatch } from "../hooks/reacthooks";
 import { FormProps } from "../types";

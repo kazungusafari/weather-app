@@ -1,4 +1,6 @@
-import { FormField } from "@kazungusafari/react-form-field";
+import React from "react";
+
+import { FormField } from "@formfield/react";
 import { SearchInput } from "./SearchInput";
 import { withFormHandlersAndState } from "../hoc";
 import { FormProps } from "../types";
