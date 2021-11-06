@@ -96,11 +96,11 @@ export type WeatherInformationT = {
 type Handler = (field: BasicField) => void;
 
 export type SearchInputProps = {
-    onChangeFieldValueHandler: Handler;
-    onChangeFieldErrorHandler: Handler;
+    fieldValueHandler: Handler;
+    fieldErrorHandler: Handler;
     isFieldTouched: boolean;
     value: string;
-    fieldErrors: FormFieldError;
+    fieldErrors: string;
 };
 
 export type HistoricalWeatherInformationInputs = {
@@ -204,7 +204,7 @@ export type HistoricalResponseData = {
 
 export type FormProps = {
     formData: { city: string };
-    onChangeFieldValueHandler: (field: BasicField) => void;
+    fieldValueHandler: (field: BasicField) => void;
     setFormError: (error: FormFieldError) => void;
     formHasError: boolean;
     handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -222,7 +222,8 @@ export type WithSearchHistoryProps = {
 export type WithWeatherDataProps = {
     weatherInformation: CurrentWeather;
 };
-declare namespace NodeJS {
+
+export declare namespace NodeJS {
     interface ProcessEnv {
         NODE_ENV: 'development' | 'production' | 'test'
         PUBLIC_URL: string

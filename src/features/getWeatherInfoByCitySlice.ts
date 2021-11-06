@@ -24,6 +24,7 @@ const initialState: State = {
 }
 
 export const getWeatherInfoByCityAsyncThunk = createAsyncThunk<any, string>('weatherInfo/get', async (city: string, { fulfillWithValue, dispatch, rejectWithValue }) => {
+
     try {
         const response: any = await get('https://community-open-weather-map.p.rapidapi.com/weather', { q: city });
         dispatch(addSearchAsyncThunk(city))
@@ -39,7 +40,9 @@ export const getWeatherInfoByCityAsyncThunk = createAsyncThunk<any, string>('wea
 export const getWeatherInfoByCitySlice = createSlice({
     name: 'weatherInformation',
     initialState,
-    reducers: {},
+    reducers: {
+
+    },
     extraReducers: (builder) => {
         builder.addCase(getWeatherInfoByCityAsyncThunk.pending, (state, _action) => {
             state.isLoading = true;
@@ -66,6 +69,7 @@ export const getWeatherInfoByCitySlice = createSlice({
 
     }
 })
+
 
 export default getWeatherInfoByCitySlice.reducer
 

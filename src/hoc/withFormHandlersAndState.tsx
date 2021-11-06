@@ -14,7 +14,7 @@ export function withFormHandlersAndState<T>(Component: React.ComponentType<T>) {
       formData,
       formErrors,
       formHasError,
-      onChangeFieldValueHandler,
+      fieldValueHandler,
       setFormError,
     } = useForm({ city: "" });
 
@@ -30,7 +30,7 @@ export function withFormHandlersAndState<T>(Component: React.ComponentType<T>) {
       <Component
         {...(props as T)}
         formData={formData}
-        onChangeFieldValueHandler={onChangeFieldValueHandler}
+        fieldValueHandler={fieldValueHandler}
         setFormError={setFormError}
         handleSubmit={handleSubmit}
       />

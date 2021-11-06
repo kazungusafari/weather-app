@@ -3,16 +3,16 @@ import { getFieldIfEvent } from "@formfield/react";
 import { SearchInputProps } from "../types";
 
 export const SearchInput = ({
-  onChangeFieldValueHandler,
-  onChangeFieldErrorHandler,
+  fieldValueHandler,
+  fieldErrorHandler,
   isFieldTouched,
   value,
   fieldErrors,
 }: SearchInputProps) => {
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const field = getFieldIfEvent(e);
-    onChangeFieldValueHandler(field);
-    onChangeFieldErrorHandler(field);
+    fieldValueHandler(field);
+    fieldErrorHandler(field);
   };
 
   return (
@@ -23,14 +23,12 @@ export const SearchInput = ({
         onChange={inputHandler}
         value={value}
         placeholder="Enter city"
+        data-testid="search-input"
       />
-      <button>Search</button>
+      <button data-testid="search-button">Search</button>
       <div className="input-error">
-        {isFieldTouched && fieldErrors.type === "required" && (
-          <p className="error">City is required</p>
-        )}
-        {isFieldTouched && fieldErrors.type === "alpha" && (
-          <p className="error">Only alphabets are allowed.</p>
+        {isFieldTouched && fieldErrors && (
+          <p className="error">{fieldErrors}</p>
         )}
       </div>
     </>

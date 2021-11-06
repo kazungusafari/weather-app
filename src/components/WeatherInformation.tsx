@@ -1,3 +1,4 @@
+import React from "react";
 import { withWeatherData } from "../hoc";
 import { WeatherInformationProps } from "../types";
 
