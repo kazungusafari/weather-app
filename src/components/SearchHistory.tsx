@@ -27,3 +27,6 @@ export const SearchHistoryW = ({
 };
 
 export const SearchHistory = withSearchHistory(SearchHistoryW);
+
+/*
+ */

@@ -96,10 +96,10 @@ export type WeatherInformationT = {
 type Handler = (field: BasicField) => void;
 
 export type SearchInputProps = {
-    fieldValueHandler: Handler;
-    fieldErrorHandler: Handler;
-    isFieldTouched: boolean;
-    value: string;
+    fieldHandler: (data: any) => void;
+    fieldHasErrors: boolean;
+    fieldValue: string;
+    fieldName: string
     fieldErrors: string;
 };
 
@@ -204,9 +204,7 @@ export type HistoricalResponseData = {
 
 export type FormProps = {
     formData: { city: string };
-    fieldValueHandler: (field: BasicField) => void;
-    setFormError: (error: FormFieldError) => void;
-    formHasError: boolean;
+    formHandlers: { setFormError: (err: FormFieldError) => void, setFormData: (field: BasicField) => void }
     handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 

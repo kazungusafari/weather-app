@@ -10,29 +10,17 @@ export function withFormHandlersAndState<T>(Component: React.ComponentType<T>) {
   return (props: Omit<T, keyof FormProps>) => {
     const dispatch = useAppDispatch();
 
-    const {
-      formData,
-      formErrors,
-      formHasError,
-      fieldValueHandler,
-      setFormError,
-    } = useForm({ city: "" });
+    const { formData, formHandlers, handleSubmit } = useForm({ city: "" });
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      if (formHasError === false) {
-        dispatch(getWeatherInfoByCityAsyncThunk(formData.city));
-      } else {
-        console.log(formErrors);
-      }
+    const onSubmit = (data: { city: string }) => {
+      dispatch(getWeatherInfoByCityAsyncThunk(data.city));
     };
     return (
       <Component
         {...(props as T)}
         formData={formData}
-        fieldValueHandler={fieldValueHandler}
-        setFormError={setFormError}
-        handleSubmit={handleSubmit}
+        formHandlers={formHandlers}
+        handleSubmit={handleSubmit(onSubmit)}
       />
     );
   };

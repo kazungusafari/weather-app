@@ -5,30 +5,31 @@ import { SearchInput } from "./SearchInput";
 import { withFormHandlersAndState } from "../hoc";
 import { FormProps } from "../types";
 
-const FormW = ({
-  handleSubmit,
-  formData,
-  formHasError,
-  fieldValueHandler,
-  setFormError,
-}: FormProps) => {
+const FormW = ({ handleSubmit, formData, formHandlers }: FormProps) => {
   return (
     <form onSubmit={handleSubmit}>
       <FormField
         name="city"
+        initialValue={formData.city}
         rules={[
           FormRules.required("City is required"),
           FormRules.alpha("Only alphabets are allowed"),
         ]}
-        onFieldError={setFormError}
+        onFieldChanges={formHandlers}
       >
-        {({ fieldErrors, isFieldTouched, fieldErrorHandler }) => (
+        {({
+          fieldErrors,
+          fieldHasErrors,
+          fieldName,
+          fieldValue,
+          fieldHandler,
+        }) => (
           <SearchInput
-            fieldErrorHandler={fieldErrorHandler}
-            fieldValueHandler={fieldValueHandler}
-            isFieldTouched={isFieldTouched}
+            fieldHandler={fieldHandler}
             fieldErrors={fieldErrors}
-            value={formData.city}
+            fieldHasErrors={fieldHasErrors}
+            fieldName={fieldName}
+            fieldValue={fieldValue}
           />
         )}
       </FormField>
