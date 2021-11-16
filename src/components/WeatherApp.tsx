@@ -4,14 +4,14 @@ import React from "react";
 import {
   HistoricalWeatherInformation,
   WeatherInformation,
-  Form,
+  SearchForm,
 } from "../components";
 
 export const WeatherApp = () => {
   return (
     <main>
       <div className="form">
-        <Form />
+        <SearchForm />
       </div>
       <div className="result">
         <WeatherInformation />

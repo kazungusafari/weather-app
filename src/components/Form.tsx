@@ -1,21 +1,23 @@
 import React from "react";
+import { getWeatherInfoByCityAsyncThunk } from "../features";
+import { useAppDispatch } from "../hooks/reacthooks";
 
-import { FormField, FormRules } from "@formfield/react";
+import { FormField, FormRules, Form } from "@formfield/react";
 import { SearchInput } from "./SearchInput";
-import { withFormHandlersAndState } from "../hoc";
-import { FormProps } from "../types";
 
-const FormW = ({ handleSubmit, formData, formHandlers }: FormProps) => {
+export const SearchForm = () => {
+  const dispatch = useAppDispatch();
+  const onSubmit = (data: { city: string }) => {
+    dispatch(getWeatherInfoByCityAsyncThunk(data.city));
+  };
   return (
-    <form onSubmit={handleSubmit}>
+    <Form onSubmit={onSubmit} initialValues={{ city: "" }}>
       <FormField
         name="city"
-        initialValue={formData.city}
         rules={[
           FormRules.required("City is required"),
           FormRules.alpha("Only alphabets are allowed"),
         ]}
-        onFieldChanges={formHandlers}
       >
         {({
           fieldErrors,
@@ -33,8 +35,6 @@ const FormW = ({ handleSubmit, formData, formHandlers }: FormProps) => {
           />
         )}
       </FormField>
-    </form>
+    </Form>
   );
 };
-
-export const Form = withFormHandlersAndState(FormW);
