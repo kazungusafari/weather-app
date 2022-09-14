@@ -19,7 +19,7 @@ export const HistoricalWeatherInformationW = ({
 }: HistoricalWeatherInformationProps) => {
   return (
     <>
-      <h1>Historical weather information</h1>
+      <h2>Historical weather information</h2>
       <p>
         Temperatures for the last {historicalWeatherData.length}
         hours

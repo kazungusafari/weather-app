@@ -11,16 +11,17 @@ export const SearchHistoryW = ({
 }) => {
   return (
     <main>
-      <div>
-        {searchHistory &&
-          searchHistory.map((value: Search) => {
-            return (
-              <p key={value.id}>
-                City : &nbsp;
-                {value.city}
-              </p>
-            );
-          })}
+      <div style={{ color: "black" }}>
+        {searchHistory && searchHistory.length > 0
+          ? searchHistory.map((value: Search) => {
+              return (
+                <p key={value.id}>
+                  City : &nbsp;
+                  {value.city}
+                </p>
+              );
+            })
+          : `No search history found`}
       </div>
     </main>
   );

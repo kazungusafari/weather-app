@@ -1,13 +1,64 @@
-* {
+/* Why download  the fonts? */
+
+@font-face {
+  font-family: "Source sans pro regular";
+  src: url("fonts/SourceSansPro-Regular.ttf") format("ttf");
+}
+@font-face {
+  font-family: "Source sans pro bold";
+  src: url("fonts/SourceSansPro-Bold.ttf") format("ttf");
+}
+
+html {
+  box-sizing: border-box; /* switch to altenative CSS box model */
+  font-size: 10px;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  font-size: 1.7rem;
+  font-weight: 500;
+  background-color: gray;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  outline: none;
 }
+p {
+  line-height: 1.6;
+}
+p::first-letter {
+  text-transform: capitalize;
+}
+h1 {
+  font-size: 5rem;
+  font-weight: 900;
+}
+h2 {
+  font-size: 4.5rem;
+  font-weight: 800;
+}
+h3 {
+  font-size: 4rem;
+  font-weight: 700;
+}
+h4 {
+  font-size: 3.5rem;
+  font-weight: 600;
+}
+h5 {
+  font-size: 3rem;
+  font-weight: 500;
+}
+h6 {
+  font-size: 2.5rem;
+}
+
 .App {
   margin: 0px;
   padding: 0px;
-  position: relative;
 }
 
 nav {
@@ -15,8 +66,6 @@ nav {
   padding: 0;
   width: 100%;
   height: 75px;
-  position: absolute;
-  top: 0;
 }
 
 ul {
@@ -37,17 +86,15 @@ li {
 }
 
 main {
-  position: absolute;
-  top: 75px;
   flex-direction: column;
+
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: white;
 }
 .form {
-  max-width: 700px;
-
   width: 100%;
   display: flex;
   justify-content: center;
@@ -85,4 +132,51 @@ button {
     width: 300px;
     padding: 2px 4px;
   }
+}
+
+/*  web safe fonts stack */
+p {
+  font-family: "Source sans pro regular", Helvetica, arial, sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Source sans pro bold", Helvetica, arial, sans-serif;
+}
+
+/* Links and different states */
+
+a {
+  outline: none;
+  text-decoration: none;
+}
+
+a:link {
+  color: blue;
+}
+a:visited {
+  color: purple;
+}
+a:hover,
+a:focus {
+  border-bottom: 1px solid;
+}
+
+a:active {
+  color: red;
+}
+
+button,
+input {
+  font-family: inherit;
+  font-size: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+textarea {
+  overflow: auto;
 }
